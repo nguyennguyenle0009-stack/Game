@@ -30,6 +30,8 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
+//		worldX = 100;
+//		worldY = 100;
 		worldX = gp.tileSize * 23;
 		worldY = gp.tileSize * 21;
 		speed = 4;
@@ -124,7 +126,7 @@ public class Player extends Entity{
 			}
 			break;
 		}
-		g2.drawImage(image, worldX, worldY, gp.tileSize, gp.tileSize, null);
+		g2.drawImage(image, screentX, screentY, gp.tileSize, gp.tileSize, null);
 	}
 	
 }

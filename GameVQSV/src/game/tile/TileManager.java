@@ -91,13 +91,13 @@ public class TileManager {
 			int screentY = worldY - gp.player.worldY + gp.player.screentY;
 			
 			if(worldX + gp.tileSize > gp.player.worldX - gp.player.screentX &&
-					worldX - gp.tileSize > gp.player.worldX - gp.player.screentX &&
-					worldY + gp.tileSize > gp.player.worldY - gp.player.screentY &&
-					worldY - gp.tileSize > gp.player.worldY - gp.player.screentY) {
-				g2.drawImage(tile[tileNum].image, screentX, screentY, gp.tileSize, gp.tileSize, null);
+			   worldX - gp.tileSize < gp.player.worldX + gp.player.screentX &&
+			   worldY + gp.tileSize > gp.player.worldY - gp.player.screentY &&
+			   worldY - gp.tileSize < gp.player.worldY + gp.player.screentY) {
+				
 			}
 			
-		
+			g2.drawImage(tile[tileNum].image, screentX, screentY, gp.tileSize, gp.tileSize, null);
 			worldCol++;
 			
 			if(worldCol == gp.maxWorldCol) {
