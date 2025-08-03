@@ -1,6 +1,7 @@
 package game.entity;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -23,6 +24,12 @@ public class Player extends Entity{
 		
 		screentX = gp.screenWidth/2 - (gp.tileSize/2);
 		screentY = gp.screenHeight/2 - (gp.tileSize/2);
+		
+		solidArea = new Rectangle();
+		solidArea.x = 0;
+		solidArea.y = 0;
+		solidArea.width = 32;
+		solidArea.height = 32;
 		
 		setDefaultValues();
 		getPLayerImage();
@@ -61,21 +68,39 @@ public class Player extends Entity{
 			
 			if(keyH.upPressed == true) {
 				direction = "up";
-				worldY -= speed;
 			}
 			else if(keyH.downPressed == true) {
 				direction = "down";
-				worldY += speed;
 			}
 			else if(keyH.leftPressed == true) {
 				direction = "left";
-				worldX -= speed;
 			}
 			else if(keyH.rightPressed == true) {
 				direction = "right";
-				worldX += speed;
 			}
 			
+			// CHECK TILE COLLSION
+			collisionOn = false;
+			gp.cChecker.checkTile(this);
+			
+			// IF COLLSION IS FALSE, PLAYER CAN MOVE
+			if(collisionOn == false) {
+				switch(direction) {
+				case "up":
+					worldY -= speed;
+					break;
+				case "down":
+					worldY += speed;
+					break;
+				case "left":
+					worldX -= speed;
+					break;
+				case "right":
+					worldX += speed;
+					break;
+				}
+			}
+			// => kiểm tra va chạm nên người chơi chỉ có thể di chuyển vào ô không rắn
 			spriteCounter++;
 			if(spriteCounter > 12) {
 				if(spriteNum == 1) {
