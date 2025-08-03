@@ -1,8 +1,10 @@
-package entity;
+package game.entity;
 
 import java.awt.image.BufferedImage;
 
 public class Entity {
+	
+	//set player default position
 	public int x, y;
 	public int speed;
 	

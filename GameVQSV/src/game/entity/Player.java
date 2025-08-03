@@ -1,4 +1,4 @@
-package entity;
+package game.entity;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -24,15 +24,14 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
-		x = 200;
-		y = 200;
+		x = 100;
+		y = 100;
 		speed = 4;
 		direction = "down";
 	}
 	
 	public void getPLayerImage() {
 	    try {
-//	        up1 = ImageIO.read(getClass().getResource("/82b3b50a-902f-46b6-8fa5-6fff389a079d.png"));
 	    	up1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a1.png"));
 	    	up2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a2.png"));
 	    	down1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a3.png"));
@@ -48,23 +47,6 @@ public class Player extends Entity{
 	
 	
 	public void update() {
-//		lần 1
-//		if(keyH.upPressed == true) {
-//			direction = "up";
-//			y -= speed;
-//		}
-//		else if(keyH.downPressed == true) {
-//			direction = "down";
-//			y += speed;
-//		}
-//		else if(keyH.leftPressed == true) {
-//			direction = "left";
-//			x -= speed;
-//		}
-//		else if(keyH.rightPressed == true) {
-//			direction = "right";
-//			x += speed;
-//		}
 		if(keyH.upPressed == true || keyH.downPressed == true 
 				|| keyH.leftPressed == true || keyH.rightPressed == true) {
 			
@@ -100,8 +82,6 @@ public class Player extends Entity{
 	}
 	
 	public void draw(Graphics g2) {
-//		g2.setColor(Color.white);
-//		g2.fillRect(x, y, gp.titleSize, gp.titleSize);
 		
 		BufferedImage image = null;
 		switch(direction) {
@@ -138,31 +118,8 @@ public class Player extends Entity{
 			}
 			break;
 		}
-		g2.drawImage(image, x, y, gp.titleSize, gp.titleSize, null);
+		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
 	}
-	
-//lần 1
-//	public void draw(Graphics g2) {
-////		g2.setColor(Color.white);
-////		g2.fillRect(x, y, gp.titleSize, gp.titleSize);
-//		
-//		BufferedImage image = null;
-//		switch(direction) {
-//		case "up":
-//			image = up1;
-//			break;
-//		case "down":
-//			image = down1;
-//			break;
-//		case "left":
-//			image = left1;
-//			break;
-//		case "right":
-//			image = right1;
-//			break;
-//		}
-//		g2.drawImage(image, x, y, gp.titleSize, gp.titleSize, null);
-//	}
 	
 }
 
