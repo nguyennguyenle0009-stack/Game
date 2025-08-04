@@ -18,6 +18,7 @@ public class MainClass {
         f.setLocationRelativeTo(null); // Đặt cửa sổ ở giữa màn hình
         f.setVisible(true); // Hiển thị cửa sổ
         
+        game.setUpGame();
         game.startGameThread(); // Bắt đầu vòng lặp game
     }
 
