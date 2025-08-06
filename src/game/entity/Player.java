@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 
 import game.main.GamePanel;
 import game.main.KeyHandler;
+import game.main.UtilityTool;
+import game.tile.Tile;
 
 public class Player extends Entity{
 	
@@ -48,20 +50,42 @@ public class Player extends Entity{
 	}
 	
 	public void getPLayerImage() {
-	    try {
-	    	up1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a1.png"));
-	    	up2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a2.png"));
-	    	down1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a3.png"));
-	    	down2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a4.png"));
-	    	left1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a5.png"));
-	    	left2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a6.png"));
-	    	right1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a7.png"));
-	    	right2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a8.png"));
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+//	    try {
+//	    	up1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a1.png"));
+//	    	up2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a2.png"));
+//	    	down1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a3.png"));
+//	    	down2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a4.png"));
+//	    	left1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a5.png"));
+//	    	left2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a6.png"));
+//	    	right1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a7.png"));
+//	    	right2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a8.png"));
+//	    } catch (IOException e) {
+//	        e.printStackTrace();
+//	    }
+//	    
+	    up1 = setUp("a1");
+	    up2 = setUp("a2");
+	    down1 = setUp("a3");
+	    down2 = setUp("a4");
+	    left1 = setUp("a5");
+	    left2 = setUp("a6");
+	    right1 = setUp("a7");
+	    right2 = setUp("a7");
 	}
 	
+	public BufferedImage setUp(String imageName) {
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage image = null;
+		
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream("/resources/player/" + imageName + ".png"));
+			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return image;
+	}
 	
 	public void update() {
 		if(keyH.upPressed == true || keyH.downPressed == true 
@@ -195,8 +219,13 @@ public class Player extends Entity{
 			}
 			break;
 		}
-		g2.drawImage(image, screentX, screentY, gp.tileSize, gp.tileSize, null);
+		
+		g2.drawImage(image, screentX, screentY, null);
+		
+		//g2.fillRect(screentX + solidArea.x, screentY + solidArea.y, solidArea.width, solidArea.height);
+		
 		//hiển thị đường biên giới nhân vật trong game
+		
 		g2.setColor(Color.red);
 		g2.drawRect(screentX + solidArea.x, screentY + solidArea.y, solidArea.width, solidArea.height);
 	}

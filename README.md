@@ -4,25 +4,35 @@
 	
 ## Tính năng
 
-- Di chuyển nhân vật 2D
-- Thu thập chìa khóa, dùng chìa khóa mở cữa
-- thu thập rương báu và kết thúc game
+- Di chuyển nhân vật 2D.
+- Thu thập chìa khóa, dùng chìa khóa mở cữa.
+- thu thập rương báu và kết thúc game.
 
 ## Cập nhật
 
-- click T để mở bảng đếm thời gian(???)
+- click T để mở bảng đếm thời gian vẽ các thứ ở mỗi vòng lặp.
+- Tỉ lệ các hình ảnh khi nhập chúng
 	
 ## Cách chạy
 
-1. Mở project trong Eclipse
-2. Chạy class `Main.java` bằng cách click chuột phải → Run As → Java Application
+1. Mở project trong Eclipse.
+2. Chạy class `Main.java` bằng cách click chuột phải → Run As → Java Application.
 
 ## Yêu cầu hệ thống
 
-- Java SE 17 trở lên
+- Java SE 17 trở lên.
 	
 ## [1.0.1] - 2025-08-06
 
 ### Lỗi 
 
 ### Sửa lỗi
+
+### PS
+
+- Không nên tạo một phiên bản mới trong vòng lặp trò chơi trừ khi thực sự cần thiết
+
+### Comment
+
+- Khi khởi tạo và nhập hình ảnh và cũng gọi phương thức này là công cụ tiện ích lấy hình ảnh đã được tỉ lệ và cũng thiết lập va chạm
+- Tối ưu hóa thời gian vẽ
