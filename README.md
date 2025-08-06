@@ -39,9 +39,12 @@
 
 ### So sánh
 
-So sánh	Loại 1 					(scale & setUp)									Loại 2 (viết tay)
-Hiệu năng (với ảnh nhỏ)			⭐⭐ (tốt, nhưng scale tốn thêm chút CPU)			⭐⭐⭐ (tốt hơn chút nếu ảnh đã đúng size)
-Tái sử dụng						✅ Tốt											❌ Không
-Dễ mở rộng						✅ Dễ thêm tile mới								❌ Khó
-Quản lý tileSize dễ dàng		✅ Có											❌ Không
-Viết code						⭐ Ngắn gọn										❌ Dài dòng, trùng lặp
+| So sánh                    | Loại 1 (scale & setUp)                         | Loại 2 (viết tay)                          |
+|---------------------------|------------------------------------------------|--------------------------------------------|
+| Hiệu năng (với ảnh nhỏ)   | ⭐⭐ (tốt, nhưng scale tốn thêm chút CPU)       | ⭐⭐⭐ (tốt hơn chút nếu ảnh đã đúng size)   |
+| Tái sử dụng               | ✅ Tốt                                         | ❌ Không                                   |
+| Dễ mở rộng                | ✅ Dễ thêm tile mới                            | ❌ Khó                                     |
+| Quản lý tileSize dễ dàng  | ✅ Có                                          | ❌ Không                                   |
+| Viết code                 | ⭐ Ngắn gọn                                    | ❌ Dài dòng, trùng lặp                     |
+
+

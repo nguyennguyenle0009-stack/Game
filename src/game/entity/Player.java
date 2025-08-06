@@ -4,14 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 import game.main.GamePanel;
 import game.main.KeyHandler;
 import game.main.UtilityTool;
-import game.tile.Tile;
 
 public class Player extends Entity{
 	
@@ -21,7 +19,7 @@ public class Player extends Entity{
 	public final int screentX;
 	public final int screentY;
 	
-	public int hasKey = 0;
+//	public int hasKey = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
@@ -50,19 +48,6 @@ public class Player extends Entity{
 	}
 	
 	public void getPLayerImage() {
-//	    try {
-//	    	up1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a1.png"));
-//	    	up2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a2.png"));
-//	    	down1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a3.png"));
-//	    	down2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a4.png"));
-//	    	left1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a5.png"));
-//	    	left2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a6.png"));
-//	    	right1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a7.png"));
-//	    	right2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/a8.png"));
-//	    } catch (IOException e) {
-//	        e.printStackTrace();
-//	    }
-//	    
 	    up1 = setUp("a1");
 	    up2 = setUp("a2");
 	    down1 = setUp("a3");
@@ -146,39 +131,39 @@ public class Player extends Entity{
 	
 	public void pickUpObject(int i) {
 		if(i != 999) {
-			//gp.obj[i] = null;
-			String objectName = gp.obj[i].name;
-			
-			switch(objectName) {
-			case "Key":
-				gp.playSE(1);
-				hasKey++;
-				gp.obj[i] = null;
-				gp.ui.showMessage("You got a key!"); //thay thế System.out.println("Key: " + hasKey);
-				break;
-			case "Door":
-				if(hasKey > 0) {
-					gp.playSE(3);
-					hasKey--;
-					gp.obj[i] = null;
-					gp.ui.showMessage("You opened the door!");
-				} else {
-					gp.ui.showMessage("You need a key!");
-				}
-				break;
-			case "Boots":
-				gp.playSE(2);
-				speed +=2;
-				gp.obj[i] = null;
-				//System.out.println("speed: " + speed);
-				gp.ui.showMessage("speed up + 2!");
-				break;
-			case "Chest":
-				gp.ui.gameFinished = true;
-				gp.stopMusic();
-				gp.playSE(4);
-				break;
-			}
+//			//gp.obj[i] = null;
+//			String objectName = gp.obj[i].name;
+//			
+//			switch(objectName) {
+//			case "Key":
+//				gp.playSE(1);
+//				hasKey++;
+//				gp.obj[i] = null;
+//				gp.ui.showMessage("You got a key!"); //thay thế System.out.println("Key: " + hasKey);
+//				break;
+//			case "Door":
+//				if(hasKey > 0) {
+//					gp.playSE(3);
+//					hasKey--;
+//					gp.obj[i] = null;
+//					gp.ui.showMessage("You opened the door!");
+//				} else {
+//					gp.ui.showMessage("You need a key!");
+//				}
+//				break;
+//			case "Boots":
+//				gp.playSE(2);
+//				speed +=2;
+//				gp.obj[i] = null;
+//				//System.out.println("speed: " + speed);
+//				gp.ui.showMessage("speed up + 2!");
+//				break;
+//			case "Chest":
+//				gp.ui.gameFinished = true;
+//				gp.stopMusic();
+//				gp.playSE(4);
+//				break;
+//			}
 		}
 	}
 	
