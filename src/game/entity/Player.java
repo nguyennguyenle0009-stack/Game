@@ -1,5 +1,6 @@
 package game.entity;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -20,6 +21,11 @@ public class Player extends Entity{
 	
 	public int hasKey = 0;
 	
+	int standCounter = 0;
+	
+	boolean moving = false;
+	int pixelCounter = 0;
+	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
 		this.keyH = keyH;
@@ -28,12 +34,14 @@ public class Player extends Entity{
 		screentY = gp.screenHeight/2 - (gp.tileSize/2);
 		
 		solidArea = new Rectangle();
-		solidArea.x = 0;
-		solidArea.y = 0;
+//		solidArea.x = 8;
+//		solidArea.y = 16;
+		solidArea.x = 1;
+		solidArea.y = 1;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.width = 32;
-		solidArea.height = 32;
+		solidArea.width = 46;
+		solidArea.height = 46;
 		
 		setDefaultValues();
 		getPLayerImage();
@@ -45,8 +53,8 @@ public class Player extends Entity{
 //		worldY = 100;
 		worldX = gp.tileSize * 23;
 		worldY = gp.tileSize * 21;
-//		speed = 4;
-		speed = gp.worldWidth/600;
+		speed = 4;
+//		speed = gp.worldWidth/600;
 		direction = "down";
 	}
 	
@@ -67,45 +75,53 @@ public class Player extends Entity{
 	
 	
 	public void update() {
-		if(keyH.upPressed == true || keyH.downPressed == true 
-				|| keyH.leftPressed == true || keyH.rightPressed == true) {
-			
-			if(keyH.upPressed == true) {
-				direction = "up";
+		
+		if(moving == false) {
+			if(keyH.upPressed == true || keyH.downPressed == true 
+					|| keyH.leftPressed == true || keyH.rightPressed == true) {
+				
+				if(keyH.upPressed == true) {
+					direction = "up";
+				}
+				else if(keyH.downPressed == true) {
+					direction = "down";
+				}
+				else if(keyH.leftPressed == true) {
+					direction = "left";
+				}
+				else if(keyH.rightPressed == true) {
+					direction = "right";
+				}
+				
+				moving = true;
+				
+				// CHECK TILE COLLSION
+				collisionOn = false;
+				gp.cChecker.checkTile(this);
+				
+				//check object collsion
+				int objIndex = gp.cChecker.checkObject(this, true);
+				pickUpObject(objIndex);
 			}
-			else if(keyH.downPressed == true) {
-				direction = "down";
+			//Thiết lập mặc định hình dáng nhân vật sau khi đứng im
+			else {
+				standCounter++;
+				if(standCounter == 20) {
+					spriteNum = 1; 
+					standCounter = 0;
+				}
+				
 			}
-			else if(keyH.leftPressed == true) {
-				direction = "left";
-			}
-			else if(keyH.rightPressed == true) {
-				direction = "right";
-			}
-			
-			// CHECK TILE COLLSION
-			collisionOn = false;
-			gp.cChecker.checkTile(this);
-			
-			//check object collsion
-			int objIndex = gp.cChecker.checkObject(this, true);
-			pickUpObject(objIndex);
-			
+		}
+		
+		if(moving == true) {
 			// IF COLLSION IS FALSE, PLAYER CAN MOVE
 			if(collisionOn == false) {
 				switch(direction) {
-				case "up":
-					worldY -= speed;
-					break;
-				case "down":
-					worldY += speed;
-					break;
-				case "left":
-					worldX -= speed;
-					break;
-				case "right":
-					worldX += speed;
-					break;
+				case "up": worldY -= speed; break;
+				case "down": worldY += speed; break;
+				case "left": worldX -= speed; break;
+				case "right": worldX += speed; break;
 				}
 			}
 			// => kiểm tra va chạm nên người chơi chỉ có thể di chuyển vào ô không rắn
@@ -119,8 +135,12 @@ public class Player extends Entity{
 				}
 				spriteCounter = 0;
 			}
+			pixelCounter += speed;
+			if(pixelCounter == 48) {
+				moving = false;
+				pixelCounter = 0;
+			}
 		}
-
 	}
 	
 	public void pickUpObject(int i) {
@@ -138,13 +158,13 @@ public class Player extends Entity{
 			case "Door":
 				if(hasKey > 0) {
 					gp.playSE(3);
-					gp.obj[i] = null;
 					hasKey--;
+					gp.obj[i] = null;
 					gp.ui.showMessage("You opened the door!");
-					break;
 				} else {
 					gp.ui.showMessage("You need a key!");
 				}
+				break;
 			case "Boots":
 				gp.playSE(2);
 				speed +=2;
@@ -199,6 +219,9 @@ public class Player extends Entity{
 			break;
 		}
 		g2.drawImage(image, screentX, screentY, gp.tileSize, gp.tileSize, null);
+		//hiển thị đường biên giới nhân vật trong game
+		g2.setColor(Color.red);
+		g2.drawRect(screentX + solidArea.x, screentY + solidArea.y, solidArea.width, solidArea.height);
 	}
 	
 }
