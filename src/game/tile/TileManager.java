@@ -20,52 +20,58 @@ public class TileManager {
 	
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
-		tile = new Tile[10];
+		tile = new Tile[50];
 		mapTileNum = new int [gp.maxWorldCol][gp.maxWorldRow];
 		getTileManager();
-		loadMap("/resources/maps/world01.txt");
+		loadMap("/resources/maps/worldV2.txt");
 	}
 	
-	public void getTileManager() {
+	public void getTileManager() {	
 		
-		setUp(0, "grass00", false);
-		setUp(1, "wall", false);
-		setUp(2, "water00", false);
-		setUp(3, "earth", false);
-		setUp(4, "tree", false);
-		setUp(5, "sand", false);
+		// PLACEHOLDER
+		setUp(1, "grass00", false);
+		setUp(2, "grass00", false);
+		setUp(3, "grass00", false);
+		setUp(4, "grass00", false);
+		setUp(5, "grass00", false);
+		setUp(6, "grass00", false);
+		setUp(7, "grass00", false);
+		setUp(8, "grass00", false);
+		setUp(9, "grass00", false);
+		setUp(10, "grass00", false);
 		
-//		try {
-//			
-//			tile[0] = new  Tile();
-//			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/resources/tiles/grass00.png"));
-//			
-//			BufferedImage scaledImage = new BufferedImage(gp.tileSize, gp.tileSize, tile[0].image.getType());
-//			Graphics2D g2 = scaledImage.createGraphics();
-//			g2.drawImage(tile[0].image,  0,  0, gp.tileSize, gp.tileSize, null);
-//			tile[0].image = scaledImage;
-//			
-//			tile[1] = new  Tile();
-//			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/resources/tiles/wall.png"));
-//			tile[1].collision = true;
-//			
-//			tile[2] = new  Tile();
-//			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/resources/tiles/water00.png"));
-//			tile[2].collision = true;
-//			
-//			tile[3] = new  Tile();
-//			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/resources/tiles/earth.png"));
-//			
-//			tile[4] = new  Tile();
-//			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/resources/tiles/tree.png"));
-//			tile[4].collision = true;
-//			
-//			tile[5] = new  Tile();
-//			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/resources/tiles/sand.png"));
-//			
-//		} catch(IOException e) {
-//			e.getStackTrace();
-//		}
+		// PLACEHOLDER
+		setUp(11, "grass01", false);
+		setUp(12, "water00", true);
+		setUp(13, "water01", true);
+		setUp(14, "water02", true);
+		setUp(15, "water03", true);
+		setUp(16, "water04", true);
+		setUp(17, "water05", true);
+		setUp(18, "water06", true);
+		setUp(19, "water07", true);
+		setUp(20, "water08", true);
+		setUp(21, "water09", true);
+		setUp(22, "water10", true);
+		setUp(23, "water11", true);
+		setUp(24, "water12", true);
+		setUp(25, "water13", true);
+		setUp(26, "road00", false);
+		setUp(27, "road01", false);
+		setUp(28, "road02", false);
+		setUp(29, "road03", false);
+		setUp(30, "road04", false);
+		setUp(31, "road05", false);
+		setUp(32, "road06", false);
+		setUp(33, "road07", false);
+		setUp(34, "road08", false);
+		setUp(35, "road09", false);
+		setUp(36, "road10", false);
+		setUp(37, "road11", false);
+		setUp(38, "road12", false);
+		setUp(39, "earth", false);
+		setUp(40, "wall", true);
+		setUp(41, "tree", true);
 	}
 	
 	public void setUp(int index, String imageName, boolean collision) {
