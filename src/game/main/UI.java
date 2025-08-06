@@ -68,10 +68,14 @@ public class UI {
 		
 		//Cỡ chữ
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
-		
 		x += gp.tileSize;
 		y += gp.tileSize;
-		g2.drawString(currentDialogue, x, y);
+		
+		for(String line : currentDialogue.split("\n")) {
+			g2.drawString(line, x, y);
+			y += 40;
+		}
+
 	}
 	
 	public void drawSubWindow(int x, int y, int width, int height) {

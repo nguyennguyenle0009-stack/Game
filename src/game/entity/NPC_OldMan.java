@@ -16,19 +16,19 @@ public class NPC_OldMan extends Entity {
 	}
 	
 	public void getImage() {
-	    up1 = setUp("/npc/oldman_down_1");
-	    up2 = setUp("/npc/oldman_down_2");
-	    down1 = setUp("/npc/oldman_left_1");
-	    down2 = setUp("/npc/oldman_left_2");
-	    left1 = setUp("/npc/oldman_right_1");
-	    left2 = setUp("/npc/oldman_right_2");
-	    right1 = setUp("/npc/oldman_up_1");
-	    right2 = setUp("/npc/oldman_up_1");
+	    up1 = setUp("/npc/oldman_up_1");
+	    up2 = setUp("/npc/oldman_up_2");
+	    down1 = setUp("/npc/oldman_down_1");
+	    down2 = setUp("/npc/oldman_down_2");
+	    left1 = setUp("/npc/oldman_left_1");
+	    left2 = setUp("/npc/oldman_left_2");
+	    right1 = setUp("/npc/oldman_right_1");
+	    right2 = setUp("/npc/oldman_right_2");
 	}
 	
 	public void setDialogue() {
 		dialogues[0] = "Hello, lad.";
-		dialogues[1] = "Hello, lad.              21";
+		dialogues[1] = "Hello, lad.  chaof anh nguyên chào anh em \n rất chào anh chào cái ******************            21";
 		dialogues[2] = "Hello, lad.        3";
 		dialogues[3] = "Hello, lad.        4";
 	}
@@ -59,11 +59,8 @@ public class NPC_OldMan extends Entity {
 		
 	}
 	public void speak( ) {
-		if (dialogues[dialogueIndex] == null) {
-			dialogueIndex = 0;
-		}
-		gp.ui.currentDialogue = dialogues[dialogueIndex];
-		dialogueIndex++;
+		//do this character specific stuff
+		super.speak();
 	}
 }
 

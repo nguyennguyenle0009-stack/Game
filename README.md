@@ -31,13 +31,15 @@
 
 ### PS
 
-- Không nên tạo một phiên bản mới trong vòng lặp trò chơi trừ khi thực sự cần thiết
+- Không nên tạo một phiên bản mới trong vòng lặp trò chơi trừ khi thực sự cần thiết.
 
 ### Comment
 
-- Khi khởi tạo và nhập hình ảnh và cũng gọi phương thức này là công cụ tiện ích lấy hình ảnh đã được tỉ lệ và cũng thiết lập va chạm
-- Tối ưu hóa thời gian vẽ
+- Khi khởi tạo và nhập hình ảnh và cũng gọi phương thức này là công cụ tiện ích lấy hình ảnh đã được tỉ lệ và cũng thiết lập va chạm.
+- Tối ưu hóa thời gian vẽ.
 - Tạo npc, thiết lập di chuyển cho npc, thiết lập va chạm với npc.
+- Nói chuyện với npc.
+- Làm npc quay về phía người chơi khi nói chuyện, chuỗi string xuống 1 dòng.
 
 ### So sánh
 
