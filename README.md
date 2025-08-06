@@ -5,6 +5,12 @@
 ## Tính năng
 
 - Di chuyển nhân vật 2D
+- Thu thập chìa khóa, dùng chìa khóa mở cữa
+- thu thập rương báu và kết thúc game
+
+## Cập nhật
+
+- click T để mở bảng đếm thời gian(???)
 	
 ## Cách chạy
 
@@ -17,11 +23,6 @@
 	
 ## [1.0.1] - 2025-08-06
 
-### Lỗi commit trước
+### Lỗi 
 
-- Nhân vật di chuyển được vào bụi khi di chuyển dưới và phải.
-- (Thiếu) khi zoom in hoặc zoom out hình ảnh item chưa được cố định rõ.
 ### Sửa lỗi
-- Xóa zoom in và zoom out
-- Xóa chuyển động dựa theo ô.
-=> Chưa cần tới
