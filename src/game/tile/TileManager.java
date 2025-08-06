@@ -90,16 +90,16 @@ public class TileManager {
 			int tileNum = mapTileNum[worldCol][worldRow];
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
-			double screentX = worldX - gp.player.worldX + gp.player.screentX;
-			double screentY = worldY - gp.player.worldY + gp.player.screentY;
+			int screentX = worldX - gp.player.worldX + gp.player.screentX;
+			int screentY = worldY - gp.player.worldY + gp.player.screentY;
 			
 			if(worldX + gp.tileSize > gp.player.worldX - gp.player.screentX &&
 			   worldX - gp.tileSize < gp.player.worldX + gp.player.screentX &&
 			   worldY + gp.tileSize > gp.player.worldY - gp.player.screentY &&
 			   worldY - gp.tileSize < gp.player.worldY + gp.player.screentY) {
-				g2.drawImage(tile[tileNum].image, (int)screentX, (int)screentY, gp.tileSize, gp.tileSize, null);
 			}
 			
+			g2.drawImage(tile[tileNum].image, screentX, screentY, gp.tileSize, gp.tileSize, null);
 			
 			worldCol++;
 			

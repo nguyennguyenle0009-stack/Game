@@ -19,11 +19,12 @@ public class GamePanel extends JPanel implements Runnable {
 	final int originalTitleSize = 16;
 	final int scale = 3;
 	
-	public int tileSize = originalTitleSize * scale;
-	public int maxScreenCol = 16;
-	public int maxScreenRow = 12;
-	public int screenWidth = tileSize * maxScreenCol;
-	public int screenHeight = tileSize * maxScreenRow;
+
+	public final int tileSize = originalTitleSize * scale;
+	public final int maxScreenCol = 16;
+	public final int maxScreenRow = 12;
+	public final int screenWidth = tileSize * maxScreenCol;
+	public final int screenHeight = tileSize * maxScreenRow;
 	
 	//WORLD SETTING
 	public final int maxWorldCol = 50;
@@ -36,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	//SYSTEM
 	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler(this);
+	KeyHandler keyH = new KeyHandler();
 	Thread thread;
 	Sound music = new Sound();
 	Sound se = new Sound();
@@ -59,22 +60,6 @@ public class GamePanel extends JPanel implements Runnable {
 	public void setUpGame() {
 		aSetter.setObject();
 		playMusic(0);
-	}
-	
-	public void zoomInOut(int i) {
-		int oldWorldWidth = tileSize * maxWorldCol; //2400
-		tileSize += i;
-		int newWorldWidth = tileSize * maxWorldCol; //2300
-		
-		player.speed = (double)worldWidth/600;
-		
-		double mutiplier = (double)newWorldWidth/oldWorldWidth;
-		
-		double newPlayerWorldX = player.worldX * mutiplier;
-		double newPlayerWorldY = player.worldY * mutiplier;
-		
-		player.worldX = newPlayerWorldX;
-		player.worldY = newPlayerWorldY;
 	}
 	
 	public void startGameThread() {

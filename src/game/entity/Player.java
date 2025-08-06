@@ -21,11 +21,6 @@ public class Player extends Entity{
 	
 	public int hasKey = 0;
 	
-	int standCounter = 0;
-	
-	boolean moving = false;
-	int pixelCounter = 0;
-	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
 		this.keyH = keyH;
@@ -34,27 +29,21 @@ public class Player extends Entity{
 		screentY = gp.screenHeight/2 - (gp.tileSize/2);
 		
 		solidArea = new Rectangle();
-//		solidArea.x = 8;
-//		solidArea.y = 16;
-		solidArea.x = 1;
-		solidArea.y = 1;
+		solidArea.x = 8;
+		solidArea.y = 16;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.width = 46;
-		solidArea.height = 46;
+		solidArea.width = 32;
+		solidArea.height = 32;
 		
 		setDefaultValues();
 		getPLayerImage();
 	}
 	
 	public void setDefaultValues() {
-		
-//		worldX = 100;
-//		worldY = 100;
 		worldX = gp.tileSize * 23;
 		worldY = gp.tileSize * 21;
 		speed = 4;
-//		speed = gp.worldWidth/600;
 		direction = "down";
 	}
 	
@@ -75,53 +64,45 @@ public class Player extends Entity{
 	
 	
 	public void update() {
-		
-		if(moving == false) {
-			if(keyH.upPressed == true || keyH.downPressed == true 
-					|| keyH.leftPressed == true || keyH.rightPressed == true) {
-				
-				if(keyH.upPressed == true) {
-					direction = "up";
-				}
-				else if(keyH.downPressed == true) {
-					direction = "down";
-				}
-				else if(keyH.leftPressed == true) {
-					direction = "left";
-				}
-				else if(keyH.rightPressed == true) {
-					direction = "right";
-				}
-				
-				moving = true;
-				
-				// CHECK TILE COLLSION
-				collisionOn = false;
-				gp.cChecker.checkTile(this);
-				
-				//check object collsion
-				int objIndex = gp.cChecker.checkObject(this, true);
-				pickUpObject(objIndex);
+		if(keyH.upPressed == true || keyH.downPressed == true 
+				|| keyH.leftPressed == true || keyH.rightPressed == true) {
+			
+			if(keyH.upPressed == true) {
+				direction = "up";
 			}
-			//Thiết lập mặc định hình dáng nhân vật sau khi đứng im
-			else {
-				standCounter++;
-				if(standCounter == 20) {
-					spriteNum = 1; 
-					standCounter = 0;
-				}
-				
+			else if(keyH.downPressed == true) {
+				direction = "down";
 			}
-		}
-		
-		if(moving == true) {
+			else if(keyH.leftPressed == true) {
+				direction = "left";
+			}
+			else if(keyH.rightPressed == true) {
+				direction = "right";
+			}
+			
+			// CHECK TILE COLLSION
+			collisionOn = false;
+			gp.cChecker.checkTile(this);
+			
+			//check object collsion
+			int objIndex = gp.cChecker.checkObject(this, true);
+			pickUpObject(objIndex);
+			
 			// IF COLLSION IS FALSE, PLAYER CAN MOVE
 			if(collisionOn == false) {
 				switch(direction) {
-				case "up": worldY -= speed; break;
-				case "down": worldY += speed; break;
-				case "left": worldX -= speed; break;
-				case "right": worldX += speed; break;
+				case "up":
+					worldY -= speed;
+					break;
+				case "down":
+					worldY += speed;
+					break;
+				case "left":
+					worldX -= speed;
+					break;
+				case "right":
+					worldX += speed;
+					break;
 				}
 			}
 			// => kiểm tra va chạm nên người chơi chỉ có thể di chuyển vào ô không rắn
@@ -135,12 +116,8 @@ public class Player extends Entity{
 				}
 				spriteCounter = 0;
 			}
-			pixelCounter += speed;
-			if(pixelCounter == 48) {
-				moving = false;
-				pixelCounter = 0;
-			}
 		}
+
 	}
 	
 	public void pickUpObject(int i) {

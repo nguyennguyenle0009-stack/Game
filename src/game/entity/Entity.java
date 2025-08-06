@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 public class Entity {
 	
 	//set player default position
-	public double worldX, worldY;
-	public double speed;
+	public int worldX, worldY;
+	public int speed;
 	
 	//thêm ảnh
 	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
