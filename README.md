@@ -37,6 +37,7 @@
 
 - Khi khởi tạo và nhập hình ảnh và cũng gọi phương thức này là công cụ tiện ích lấy hình ảnh đã được tỉ lệ và cũng thiết lập va chạm
 - Tối ưu hóa thời gian vẽ
+- Tạo npc, thiết lập di chuyển cho npc, thiết lập va chạm với npc.
 
 ### So sánh
 

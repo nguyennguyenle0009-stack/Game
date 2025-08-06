@@ -5,24 +5,20 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
-
 import game.main.GamePanel;
 import game.main.KeyHandler;
-import game.main.UtilityTool;
 
 public class Player extends Entity{
 	
-	GamePanel gp;
 	KeyHandler keyH;
 	
 	public final int screentX;
 	public final int screentY;
 	
-//	public int hasKey = 0;
-	
 	public Player(GamePanel gp, KeyHandler keyH) {
-		this.gp = gp;
+		
+		super(gp);
+		
 		this.keyH = keyH;
 		
 		screentX = gp.screenWidth/2 - (gp.tileSize/2);
@@ -48,28 +44,14 @@ public class Player extends Entity{
 	}
 	
 	public void getPLayerImage() {
-	    up1 = setUp("a1");
-	    up2 = setUp("a2");
-	    down1 = setUp("a3");
-	    down2 = setUp("a4");
-	    left1 = setUp("a5");
-	    left2 = setUp("a6");
-	    right1 = setUp("a7");
-	    right2 = setUp("a7");
-	}
-	
-	public BufferedImage setUp(String imageName) {
-		UtilityTool uTool = new UtilityTool();
-		BufferedImage image = null;
-		
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/resources/player/" + imageName + ".png"));
-			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return image;
+	    up1 = setUp("/player/a1");
+	    up2 = setUp("/player/a2");
+	    down1 = setUp("/player/a3");
+	    down2 = setUp("/player/a4");
+	    left1 = setUp("/player/a5");
+	    left2 = setUp("/player/a6");
+	    right1 = setUp("/player/a7");
+	    right2 = setUp("/player/a7");
 	}
 	
 	public void update() {
@@ -92,11 +74,15 @@ public class Player extends Entity{
 			// CHECK TILE COLLSION
 			collisionOn = false;
 			//Va chạm
-			//gp.cChecker.checkTile(this);
+			gp.cChecker.checkTile(this);
 			
 			//check object collsion
 			int objIndex = gp.cChecker.checkObject(this, true);
 			pickUpObject(objIndex);
+			
+			//CHECK NPC COLLISION
+			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+			interactNPC(npcIndex);
 			
 			// IF COLLSION IS FALSE, PLAYER CAN MOVE
 			if(collisionOn == false) {
@@ -132,6 +118,12 @@ public class Player extends Entity{
 	
 	public void pickUpObject(int i) {
 		if(i != 999) {
+		}
+	}
+	
+	public void interactNPC(int i) {
+		if(i != 999) {
+			System.out.println("npc cham");
 		}
 	}
 	
