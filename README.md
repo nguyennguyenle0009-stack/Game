@@ -5,8 +5,9 @@
 ## Tính năng
 
 - Di chuyển nhân vật 2D.
-- Thu thập chìa khóa, dùng chìa khóa mở cữa.
-- thu thập rương báu và kết thúc game.
+- Thu thập chìa khóa, dùng chìa khóa mở cữa(drop).
+- Thu thập rương báu và kết thúc game(drop).
+- Tạm dừng và tiếp tục.
 
 ## Cập nhật
 

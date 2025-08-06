@@ -127,13 +127,38 @@ public class TileManager {
 			int screentX = worldX - gp.player.worldX + gp.player.screentX;
 			int screentY = worldY - gp.player.worldY + gp.player.screentY;
 			
+			//Stop moving the camera at the edge
+			if (gp.player.screentX > gp.player.worldX) {
+				screentX = worldX;
+			}
+			if (gp.player.screentY > gp.player.worldY) {
+				screentY = worldY;
+			}
+			
+			int rightOffset = gp.screenWidth - gp.player.screentX;
+			if (rightOffset > gp.worldWidth - gp.player.worldX) {
+				screentX = gp.screenWidth - (gp.worldWidth -  worldX);
+			}
+			
+			int bottomOffset = gp.screenHeight - gp.player.screentY;
+			if (bottomOffset > gp.worldHeight - gp.player.worldY) {
+				screentX = gp.screenHeight - (gp.worldHeight -  worldY);
+			}
+			
 			if(worldX + gp.tileSize > gp.player.worldX - gp.player.screentX &&
 			   worldX - gp.tileSize < gp.player.worldX + gp.player.screentX &&
 			   worldY + gp.tileSize > gp.player.worldY - gp.player.screentY &&
 			   worldY - gp.tileSize < gp.player.worldY + gp.player.screentY) {
+				
+				g2.drawImage(tile[tileNum].image, screentX, screentY, null);
+			}
+			else if (gp.player.screentX > gp.player.worldX ||
+					 gp.player.screentY > gp.player.worldY ||
+					 rightOffset > gp.worldWidth - gp.player.worldX ||
+					 bottomOffset > gp.worldHeight - gp.player.worldY) {
+				g2.drawImage(tile[tileNum].image, screentX, screentY, null);
 			}
 			
-			g2.drawImage(tile[tileNum].image, screentX, screentY, null);
 			
 			worldCol++;
 			

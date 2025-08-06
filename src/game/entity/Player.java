@@ -91,7 +91,8 @@ public class Player extends Entity{
 			
 			// CHECK TILE COLLSION
 			collisionOn = false;
-			gp.cChecker.checkTile(this);
+			//Va chạm
+			//gp.cChecker.checkTile(this);
 			
 			//check object collsion
 			int objIndex = gp.cChecker.checkObject(this, true);
@@ -131,39 +132,6 @@ public class Player extends Entity{
 	
 	public void pickUpObject(int i) {
 		if(i != 999) {
-//			//gp.obj[i] = null;
-//			String objectName = gp.obj[i].name;
-//			
-//			switch(objectName) {
-//			case "Key":
-//				gp.playSE(1);
-//				hasKey++;
-//				gp.obj[i] = null;
-//				gp.ui.showMessage("You got a key!"); //thay thế System.out.println("Key: " + hasKey);
-//				break;
-//			case "Door":
-//				if(hasKey > 0) {
-//					gp.playSE(3);
-//					hasKey--;
-//					gp.obj[i] = null;
-//					gp.ui.showMessage("You opened the door!");
-//				} else {
-//					gp.ui.showMessage("You need a key!");
-//				}
-//				break;
-//			case "Boots":
-//				gp.playSE(2);
-//				speed +=2;
-//				gp.obj[i] = null;
-//				//System.out.println("speed: " + speed);
-//				gp.ui.showMessage("speed up + 2!");
-//				break;
-//			case "Chest":
-//				gp.ui.gameFinished = true;
-//				gp.stopMusic();
-//				gp.playSE(4);
-//				break;
-//			}
 		}
 	}
 	
@@ -205,7 +173,26 @@ public class Player extends Entity{
 			break;
 		}
 		
-		g2.drawImage(image, screentX, screentY, null);
+		int x = screentX;
+		int y = screentY;
+		
+		if (screentX > worldX) {
+			x = worldX;
+		}
+		if (screentY > worldY) {
+			y = worldY;
+		}
+		int rightOffset = gp.screenWidth - screentX;
+		if (rightOffset > gp.worldWidth - worldX) {
+			x = gp.screenWidth - (gp.worldWidth -  worldX);
+		}
+		
+		int bottomOffset = gp.screenHeight - screentY;
+		if (bottomOffset > gp.worldHeight - worldY) {
+			x = gp.screenHeight - (gp.worldHeight -  worldY);
+		}
+		
+		g2.drawImage(image, x, y, null);
 		
 		//g2.fillRect(screentX + solidArea.x, screentY + solidArea.y, solidArea.width, solidArea.height);
 		
