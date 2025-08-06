@@ -27,17 +27,35 @@ public class KeyHandler implements KeyListener {
 		
 		int code = e.getKeyCode();
 		
-		if (code == KeyEvent.VK_W) {
-			upPressed = true;
+		if (gp.gameState == gp.playState) {
+			if (code == KeyEvent.VK_W) {
+				upPressed = true;
+			}
+			if (code == KeyEvent.VK_S) {
+				downPressed = true;
+			}
+			if (code == KeyEvent.VK_A) {
+				leftPressed = true;
+			}
+			if (code == KeyEvent.VK_D) {
+				rightPressed = true;
+			}
+			if (code == KeyEvent.VK_P) {
+				gp.gameState = gp.pauseState;
+			}
 		}
-		if (code == KeyEvent.VK_S) {
-			downPressed = true;
+		//PAUSE STATE
+		else if (gp.gameState == gp.pauseState) {
+			if (code == KeyEvent.VK_P) {
+				gp.gameState = gp.pauseState;
+			}
 		}
-		if (code == KeyEvent.VK_A) {
-			leftPressed = true;
-		}
-		if (code == KeyEvent.VK_D) {
-			rightPressed = true;
+		
+		//DIALOGUE STATE
+		else if (gp.gameState == gp.dialogueState) {
+			if (code == KeyEvent.VK_ENTER) {
+				gp.gameState = gp.playState;
+			}
 		}
 	}
 
