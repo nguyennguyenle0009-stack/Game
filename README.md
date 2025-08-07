@@ -40,6 +40,7 @@
 - Tạo npc, thiết lập di chuyển cho npc, thiết lập va chạm với npc.
 - Nói chuyện với npc.
 - Làm npc quay về phía người chơi khi nói chuyện, chuỗi string xuống 1 dòng.
+- Thiết lập font chữ
 
 ### So sánh
 
