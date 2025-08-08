@@ -18,6 +18,9 @@ public class UI {
 	public String message = "";
 	int messagerCouter = 0;
 	public String currentDialogue = "";
+	//Thêm tùy chọn
+	public int commandNum = 0;
+	// public int titleScreenState = 0; // 0:the first screen, 1:the second screen
 	
 	public UI (GamePanel gp) {
 		this.gp = gp;
@@ -47,6 +50,11 @@ public class UI {
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2.setColor(Color.white);
 		
+		//Title state
+		if(gp.gameState == gp.titleState) {
+			drawTitleScreen();
+		}
+		
 		//PLAY STATE
 		if(gp.gameState == gp.playState) {
 			//do play state stuff later
@@ -61,6 +69,65 @@ public class UI {
 		if(gp.gameState == gp.dialogueState) {
 			drawDialogueScreen();
 		}
+	}
+	
+	public void drawTitleScreen() {
+		
+//		if (titleScreenState == 0) {
+//			
+//		}
+		
+		g2.setColor(new Color(0,0,0));
+		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+		
+		//TITLE NAME
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+		String text = "Blue Boy Adventure";
+		int x = getXForCenteredText(text);
+		int y = gp.tileSize*3;
+		
+		//SHADOW
+		g2.setColor(Color.gray);
+		g2.drawString(text, x + 5, y + 5);
+		
+		//MAIN COLOR
+		g2.setColor(Color.white);
+		g2.drawString(text, x, y);
+		
+		//BLUE BOY IMAGE
+		x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
+		y += gp.tileSize * 2;
+		g2.drawImage(gp.player.down1, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
+		
+		//MENU
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+		text = "NEW GAME";
+		x = getXForCenteredText(text);
+		y += gp.tileSize * 4;
+		g2.drawString(text, x, y);
+		if(commandNum == 0) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+		
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+		text = "LOAD GAME";
+		x = getXForCenteredText(text);
+		y += gp.tileSize;
+		g2.drawString(text, x, y);
+		if(commandNum == 1) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+		
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+		text = "QUIT";
+		x = getXForCenteredText(text);
+		y += gp.tileSize;
+		g2.drawString(text, x, y);
+		if(commandNum == 2) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+		
+		
 	}
 	
 	public void drawPauseScreen() {
