@@ -87,7 +87,7 @@ public class UI {
 	public void drawPlayerLife() {
 		
 		//giảm sinh lực
-		gp.player.life = 5;
+//		gp.player.life = 5;
 		
 		//nơi hiển thị
 		int x = gp.tileSize/2;

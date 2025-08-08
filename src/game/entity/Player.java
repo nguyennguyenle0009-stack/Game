@@ -88,6 +88,11 @@ public class Player extends Entity{
 			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 			interactNPC(npcIndex);
 			
+			//check event
+			gp.eHandler.checkEvent();
+			
+			gp.keyH.enterPresed = false;
+			
 			// IF COLLSION IS FALSE, PLAYER CAN MOVE
 			if(collisionOn == false) {
 				switch(direction) {
@@ -134,7 +139,7 @@ public class Player extends Entity{
 			}
 
 		}
-		gp.keyH.enterPresed = false;
+
 	}
 	
 	public void draw(Graphics g2) {
