@@ -1,25 +1,25 @@
 package game.object;
 
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
+import game.entity.Entity;
 import game.main.GamePanel;
 
-public class OBJ_Door extends SuperObject {
+public class OBJ_Door extends Entity {
 	
 	GamePanel gp;
 	
 	public OBJ_Door(GamePanel gp) {
+		super(gp);
+		
 		name = "Door";
-		this.gp = gp;
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/resources/objects/door.png"));
-			uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-		} catch(IOException e) {
-			e.getStackTrace();
-		}
-		this.collision = true;
+		down1  = setUp("/objects/door");
+		collision = true;
+		
+		solidArea.x = 0;
+		solidArea.y = 16;
+		solidArea.width = 48;
+		solidArea.height = 32;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
 	}
 	
 }
