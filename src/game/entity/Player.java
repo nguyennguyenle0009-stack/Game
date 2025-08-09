@@ -1,7 +1,10 @@
 package game.entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -88,6 +91,10 @@ public class Player extends Entity{
 			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 			interactNPC(npcIndex);
 			
+			//CHECK MONSTER COLLISION
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+			contactMonter(monsterIndex);
+			
 			//check event
 			gp.eHandler.checkEvent();
 			
@@ -122,7 +129,14 @@ public class Player extends Entity{
 				spriteCounter = 0;
 			}
 		}
-
+		//This needs to be outside of key statement!
+		if(invincible == true) {
+			invincibleCounter++;
+			if(invincibleCounter > 60) {
+				invincible = false;
+				invincibleCounter = 0;
+			}
+		}
 	}
 	
 	public void pickUpObject(int i) {
@@ -142,9 +156,22 @@ public class Player extends Entity{
 
 	}
 	
-	public void draw(Graphics g2) {
+	public void contactMonter(int i) {
+		if(i != 999) {
+			
+			if(invincible == false) {
+				life -= 1;
+				invincible = true;
+			}
+
+		}
+	}
+	
+	public void draw(Graphics g) {
 		
 		BufferedImage image = null;
+		Graphics2D g2 = (Graphics2D)g;
+		
 		switch(direction) {
 		case "up":
 			if (spriteNum == 1) {
@@ -199,7 +226,16 @@ public class Player extends Entity{
 			x = gp.screenHeight - (gp.worldHeight -  worldY);
 		}
 		
+		if (invincible == true) {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+		}
+		
 		g2.drawImage(image, x, y, null);
+		
+		//Reset alpha
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+		
+		
 		
 		//g2.fillRect(screentX + solidArea.x, screentY + solidArea.y, solidArea.width, solidArea.height);
 		
@@ -207,6 +243,33 @@ public class Player extends Entity{
 		
 		g2.setColor(Color.red);
 		g2.drawRect(screentX + solidArea.x, screentY + solidArea.y, solidArea.width, solidArea.height);
+		
+		//DEBUG
+//		g2.setFont(new Font("Arial", Font.PLAIN, 26));
+//		g2.setColor(Color.white);
+//		g2.drawString("invincible: " + invincibleCounter, 10, 400);
+		
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,6 +9,7 @@
 - Thu thập rương báu và kết thúc game(drop).
 - Tạm dừng và tiếp tục.
 - Sự kiện (Hố sát thương, Hồ hồi máu, Ô dịch chuyển) Advanced Mechanics
+- Monster
 
 ## Cập nhật
 
@@ -39,8 +40,9 @@
 - Tạo npc, thiết lập di chuyển cho npc, thiết lập va chạm với npc.
 - Nói chuyện với npc.
 - Làm npc quay về phía người chơi khi nói chuyện, chuỗi string xuống 1 dòng.
-- Thiết lập font chữ
-- Sự kiện (Hố sát thương, Hồ hồi máu, Ô dịch chuyển) Advanced Mechanics
+- Thiết lập font chữ.
+- Sự kiện (Hố sát thương, Hồ hồi máu, Ô dịch chuyển) Advanced Mechanics.
+- Monster, xử lý va chạm giữa các thực thể, người chơi chạm vào quái vật sẽ nhận được một số sát thương, khi người chơi nhận sát thương anh ta sẽ bất khả chiến bại một thời gian
 
 ### So sánh
 
