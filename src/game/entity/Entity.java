@@ -1,6 +1,7 @@
 package game.entity;
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -44,11 +45,20 @@ public class Entity {
 	public boolean collision = false;
 	public int type; // 0 = player, 1 = npc, 2 = monster
 	boolean attacking = false;
+	public boolean alive = true;
+	public boolean dying = false;
+	int dyingCouter = 0;
+	
+	boolean hpBarOn = false;
+	int hpBarCouter = 0;
 	
 	public Entity (GamePanel gp) {
 		this.gp = gp;
 	}
 	public void setAcction() {
+		
+	}
+	public void damageReaction() {
 		
 	}
 	public void speak() {
@@ -86,6 +96,7 @@ public class Entity {
 		if(this.type == 2 && contactPlayer == true) {
 			if(gp.player.invincible == false) {
 				//we can give damage
+				gp.playSE(7);
 				gp.player.life -= 1;
 				gp.player.invincible = true;
 			}
@@ -163,15 +174,73 @@ public class Entity {
 				break;
 			}
 			
+			if(type == 2 && hpBarOn == true) {
+				
+				double onScale = (double)gp.tileSize/maxlife;
+				double hpBarValue = onScale * life;
+				
+				g2.setColor(new Color(35, 35, 35));
+				g2.fillRect((int)screentX - 1, (int)screentY - 16, gp.tileSize + 2, 13);
+				
+				g2.setColor(new Color(255, 0, 30));
+				g2.fillRect((int)screentX, (int)screentY - 15, (int)hpBarValue, 10);
+				
+				hpBarCouter++;
+				
+				if(hpBarCouter > 600) {
+					hpBarCouter = 0;
+					hpBarOn = false;
+				}
+			}
+
 			if (invincible == true) {
-				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+				hpBarOn = true;
+				hpBarCouter = 0;
+				changeAlpha(g2, 0.4F);
+			}
+			
+			if(dying == true) {
+				dyingAnimation(g2);
 			}
 			
 			g2.drawImage(image, (int)screentX, (int)screentY, gp.tileSize, gp.tileSize, null);
 			
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+			changeAlpha(g2, 1F);
+			
 		}
 	}
+	
+	public void dyingAnimation(Graphics2D g2) {
+		dyingCouter++;
+		
+		int i = 10;
+		
+		if(dyingCouter <= i ) { changeAlpha(g2, 0f); }
+		
+		if(dyingCouter > i && dyingCouter <= i * 2 ) { changeAlpha(g2, 1f); }
+		
+		if(dyingCouter > i * 2 && dyingCouter <= i * 3 ) { changeAlpha(g2, 0f); }
+		
+		if(dyingCouter > i * 3 && dyingCouter <= i * 4 ) { changeAlpha(g2, 1f); }
+	
+		if(dyingCouter > i * 4 && dyingCouter <= i * 5 ) { changeAlpha(g2, 0f); }
+		
+		if(dyingCouter > i * 5 && dyingCouter <= i * 6 ) { changeAlpha(g2, 1f); }
+		
+		if(dyingCouter > i * 6 && dyingCouter <= i * 7 ) { changeAlpha(g2, 0f); }
+		
+		if(dyingCouter > i * 7 && dyingCouter <= i * 8 ) { changeAlpha(g2, 1f); }
+		
+		if(dyingCouter > i * 8) {
+			dying = false;
+			alive = false;
+		}
+	}
+	
+	public void changeAlpha(Graphics2D g2, float alphaValue) {
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
+	}
+	
 	public BufferedImage setUp(String imagePath, int width, int height) {
 		UtilityTool uTool = new UtilityTool();
 		BufferedImage image = null;
