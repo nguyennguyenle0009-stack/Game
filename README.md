@@ -43,6 +43,7 @@
 - Thiết lập font chữ.
 - Sự kiện (Hố sát thương, Hồ hồi máu, Ô dịch chuyển) Advanced Mechanics.
 - Monster, xử lý va chạm giữa các thực thể, người chơi chạm vào quái vật sẽ nhận được một số sát thương, khi người chơi nhận sát thương anh ta sẽ bất khả chiến bại một thời gian
+- Hit detection, tấn công quái vật
 
 ### So sánh
 

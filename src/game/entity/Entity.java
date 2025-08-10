@@ -1,6 +1,8 @@
 package game.entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -16,11 +18,15 @@ public class Entity {
 	public int speed;
 	//thêm ảnh
 	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+	public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, 
+							attackLeft1, attackLeft2, attackRight1, attackRight2;
+	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+	public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
 	public  String direction = "down";
 	//hiệu ứng chuyển động
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
-	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+
 	public boolean collisionOn = false;
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public int actionLockCounter = 0;
@@ -37,6 +43,7 @@ public class Entity {
 	public String name;
 	public boolean collision = false;
 	public int type; // 0 = player, 1 = npc, 2 = monster
+	boolean attacking = false;
 	
 	public Entity (GamePanel gp) {
 		this.gp = gp;
@@ -113,10 +120,21 @@ public class Entity {
 			}
 			spriteCounter = 0;
 		}
+		
+		//This needs to be outside of key statement!
+		if(invincible == true) {
+			invincibleCounter++;
+			if(invincibleCounter > 40) {
+				invincible = false;
+				invincibleCounter = 0;
+			}
+		}
+		
 	}
-	public void draw (Graphics g2) {
+	public void draw (Graphics g) {
 		
 		BufferedImage image = null;
+		Graphics2D g2 = (Graphics2D)g;
 		
 		double screentX = worldX - gp.player.worldX + gp.player.screentX;
 		double screentY = worldY - gp.player.worldY + gp.player.screentY;
@@ -128,49 +146,39 @@ public class Entity {
 			
 			switch(direction) {
 			case "up":
-				if (spriteNum == 1) {
-					image = up1;
-				}
-				if (spriteNum == 2) {
-					image = up2;
-				}
+				if (spriteNum == 1) { image = up1; }
+				if (spriteNum == 2) { image = up2; }
 				break;
 			case "down":
-				if (spriteNum == 1) {
-					image = down1;
-				}			
-				if (spriteNum == 2) {
-					image = down2;
-				}
+				if (spriteNum == 1) { image = down1; }			
+				if (spriteNum == 2) { image = down2; }
 				break;
 			case "left":
-				if (spriteNum == 1) {
-					image = left1;
-				}
-				if (spriteNum == 2) {
-					image = left2;
-				}
+				if (spriteNum == 1) { image = left1; }
+				if (spriteNum == 2) { image = left2; }
 				break;
 			case "right":
-				if (spriteNum == 1) {
-					image = right1;
-				}
-				if (spriteNum == 2) {
-					image = right2;
-				}
+				if (spriteNum == 1) { image = right1; }
+				if (spriteNum == 2) { image = right2; }
 				break;
 			}
 			
+			if (invincible == true) {
+				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+			}
+			
 			g2.drawImage(image, (int)screentX, (int)screentY, gp.tileSize, gp.tileSize, null);
+			
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
 	}
-	public BufferedImage setUp(String imagePath) {
+	public BufferedImage setUp(String imagePath, int width, int height) {
 		UtilityTool uTool = new UtilityTool();
 		BufferedImage image = null;
 		
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/resources" + imagePath + ".png"));
-			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+			image = uTool.scaleImage(image, width, height);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

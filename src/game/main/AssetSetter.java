@@ -2,7 +2,6 @@ package game.main;
 
 import game.entity.NPC_OldMan;
 import game.monster.MON_GreenSlime;
-import game.object.OBJ_Door;
 
 public class AssetSetter {
 	

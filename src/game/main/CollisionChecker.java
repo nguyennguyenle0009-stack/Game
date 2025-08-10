@@ -121,7 +121,7 @@ public class CollisionChecker {
 				if(entity.solidArea.intersects(target[i].solidArea)) {
 					if (target[i] != entity) {
 						entity.collisionOn = true;
-						index =1;
+						index = i;
 					}
 
 				}
